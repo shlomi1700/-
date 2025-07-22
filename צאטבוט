@@ -945,34 +945,39 @@
             }
 
             toggleChat() {
-                console.log(`🔄 Toggle chat - Current state: ${this.isOpen ? 'open' : 'closed'}`);
-                
-                const chatWidget = document.getElementById('smartsales-chat-widget');
-                const chatWindow = document.getElementById('smartsales-chat-window');
-                const notification = document.querySelector('.chat-notification');
-                
-                if (this.isOpen) {
-                    this.closeChat();
-                } else {
-                    // Open chat
-                    console.log('📖 Opening chat...');
-                    chatWidget.classList.remove('minimized');
-                    chatWindow.classList.add('open');
-                    this.isOpen = true;
-                    
-                    if (notification) {
-                        notification.style.display = 'none';
-                    }
-                    
-                    // Focus input
-                    setTimeout(() => {
-                        const input = document.getElementById('smartsales-input');
-                        if (input) input.focus();
-                    }, 300);
-                    
-                    console.log('✅ Chat opened successfully');
-                }
-            }
+    console.log(`🔄 Toggle chat - Current state: ${this.isOpen ? 'open' : 'closed'}`);
+    
+    const chatWidget = document.getElementById('smartsales-chat-widget');
+    const chatWindow = document.getElementById('smartsales-chat-window');
+    const notification = document.querySelector('.chat-notification');
+    
+    if (!chatWidget || !chatWindow) {
+        console.error('❌ Chat elements not found');
+        return;
+    }
+    
+    if (this.isOpen) {
+        this.closeChat();
+    } else {
+        // Open chat
+        console.log('📖 Opening chat...');
+        chatWidget.classList.remove('minimized');
+        chatWindow.classList.add('open');
+        this.isOpen = true;
+        
+        if (notification) {
+            notification.style.display = 'none';
+        }
+        
+        // Focus input
+        setTimeout(() => {
+            const input = document.getElementById('smartsales-input');
+            if (input) input.focus();
+        }, 300);
+        
+        console.log('✅ Chat opened successfully');
+    }
+}
 
             closeChat() {
                 console.log('📕 Closing chat...');
